@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Edu_TAS_Beginner } from 'next/font/google'
 import MainPage from '@/components/mainPage'
+import styles from '@/styles/Home.module.css'
 
 const edu_tas_beginner = Edu_TAS_Beginner({
   weight: ['400', '500'],
@@ -26,6 +27,7 @@ export default function Home() {
       </Head>
       <main  >
         <MainPage />
+        <p className={styles.builtText}>Built by <a href='https://www.elenadiaz.space' className={styles.link}>Elena Diaz</a></p>
       </main>
     </>
   )
