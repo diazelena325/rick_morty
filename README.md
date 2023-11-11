@@ -6,6 +6,7 @@ This project is a Next.js application built with React and TypeScript that imple
 
 [Demo](https://rickandmorty-diaz-demo.netlify.app/) 
 
+
 ## Installation
 
 Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
@@ -13,8 +14,8 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+git clone https://github.com/diazelena325/rick_morty.git
+cd rick_morty
 ```
 
 2. Install dependencies:
