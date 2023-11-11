@@ -4,7 +4,7 @@
 
 This project is a Next.js application built with React and TypeScript that implements an Image Feed using the public API provided by [Rick and Morty API](https://rickandmortyapi.com/documentation/#rest). The main features include displaying a list of episodes on the initial page load, highlighting the selected episode, and updating the main view with characters from the selected episode.
 
-Demo: 
+[Demo](https://rickandmorty-diaz-demo.netlify.app/) 
 
 ## Installation
 
