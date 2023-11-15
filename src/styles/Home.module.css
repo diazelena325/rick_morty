@@ -37,6 +37,7 @@
 
 .mainTitle {
 margin: 1rem;
+padding-bottom: 1rem;
 }
 
 .content{
@@ -46,7 +47,11 @@ margin: 1rem;
   flex-wrap: wrap;
 }
 
+/* ----Loader------------------ */
+
 .loader{
+  font-size: 1rem;
+  font-weight: 500;
  opacity: 0;
    animation-name: show-loader;
    animation-duration: 1s;
@@ -61,27 +66,29 @@ margin: 1rem;
 /* ----Characters------------------ */
 .charContainer {
 text-align: start;
-margin: 1.5rem;
+margin: 0 0 1.5rem 1.5rem;
+min-width: 40vw;
 max-width: 60vw;
+
 }
 
 .charSelectText{
-  margin-left: 1rem;
+  margin: 0 0 1rem 1rem;
 }
 
 .charGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  
   width: 100%;
   height:80vh;
   overflow-y:auto;
   overflow-x:hidden;
-  padding: 1rem;
   opacity: 0;
   animation-name: fade-in;
   animation-duration: 2s;
   animation-fill-mode: forwards;
+  
   }
 
   @keyframes fade-in {
@@ -99,7 +106,8 @@ max-width: 60vw;
     text-align: center;
     align-items: center;
     width: 10em;
-    height: 10em;
+    height: fit-content;
+    margin: .5rem 0 .5rem 0;
   }
 
   .img{
@@ -126,7 +134,8 @@ max-width: 60vw;
   text-align: start;
   padding: 1em;
   height:80vh;
-  background-color: var(--rick-hair);
+  max-width: 20vw;
+  background-color: rgb(var(--rick-hair));
 }
 
 .epTitle{
@@ -136,10 +145,11 @@ max-width: 60vw;
 
 .epList{
   list-style-type: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   height:73vh;
   gap: 1rem;
+  min-width: 10vw;
 }
 
 .epItem{
@@ -183,6 +193,39 @@ text-decoration: underline;
   padding: .5rem;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.errorDiv{
+  
+  margin: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(var(--base-black-rgb));
+
+}
+
+.errorDiv > ul{
+  list-style-type: none;
+  color: rgb(var(--squid-ink-rgb));
+}
+
+.errorDiv > ul li{
+  margin-bottom: 0.5rem;
+}
+
+.errorImage{
+  width: 50%;
+  height: 50%;
+}
+.errorMessage{
+text-align: left;
+margin: .5rem;
+}
+
+.errorButton{
+  padding: .5rem;
+  color: rgb(var(--base-white-rgb));
+  background-color: rgb(var(--squid-ink-rgb));
 }
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

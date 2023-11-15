@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getEpisodeList } from '../pages/api/rickAndMortyAPI'
-import { IEpisode } from "@/interfaces/interfaces";
+import { getEpisodeList } from '../pages/api/episode_rmAPI'
+import { IEpisode } from "@/interfaces/interfaces"
 import styles from '@/styles/Home.module.css'
+import Error from '@/components/error'
+import EpisodeItem from '@/components/Episodes/episode_item'
 
 const initialItems: IEpisode[] =
     [{
@@ -11,9 +13,7 @@ const initialItems: IEpisode[] =
     }
     ]
 
-interface Props { handleUpdateCharacters: ((chList: number[], title: string) => void) }
-
-function episodeList(props: Props) {
+function episodeList(props: { handleUpdateCharacters: ((chList: number[], title: string) => void) }) {
     const [episodes, setEpisodes] = useState(initialItems);
     const [activeButton, setActiveButton] = useState<number>(-1);
 
@@ -35,15 +35,18 @@ function episodeList(props: Props) {
         <div className={styles.epContainer}>
             <h2 className={styles.epTitle}>Episodes</h2>
             <ul className={styles.epList}>
-                {episodes.map((ep) => {
-                    return (
-                        <li key={ep.id}><button className={`${styles.epItem} ${activeButton === ep.id ? styles.special : ''}`}
-                            onClick={() => {
-                                toggleActiveButton(ep.id);
-                                activeButton === ep.id ? props.handleUpdateCharacters([], "") : props.handleUpdateCharacters(ep.charactersIds, ep.name)
-                            }}><p className={styles.epText}>{ep.name}</p></button> </li>
-                    )
-                })}
+                {episodes && episodes.length > 0 ?
+                    episodes.map((ep: IEpisode) => {
+                        return (
+                            <EpisodeItem
+                                key={ep.id}
+                                activeButton={activeButton}
+                                ep={ep}
+                                toggleActiveButton={toggleActiveButton}
+                                handleUpdateCharacters={props.handleUpdateCharacters} />
+                        )
+                    })
+                    : <Error message={'episodes'} />}
             </ul>
         </div>
     )
