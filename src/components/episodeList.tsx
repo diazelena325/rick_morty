@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import Error from '@/components/error'
 import EpisodeItem from '@/components/Episodes/episode_item'
 
+
 const initialItems: IEpisode[] =
     [{
         charactersIds: [0],
@@ -16,11 +17,21 @@ const initialItems: IEpisode[] =
 function episodeList(props: { handleUpdateCharacters: ((chList: number[], title: string) => void) }) {
     const [episodes, setEpisodes] = useState(initialItems);
     const [activeButton, setActiveButton] = useState<number>(-1);
+    const [errorOccured, setErrorOccured] = useState<boolean>(false);
 
     useEffect(() => {
-        getEpisodeList().then(data => {
-            setEpisodes(data);
-        });
+
+        const fetchEpisodeData = async () => {
+            try {
+                const data = await getEpisodeList();
+                setEpisodes(data as IEpisode[]);
+                setErrorOccured(false);
+            } catch (error) {
+                setErrorOccured(true);
+            }
+        };
+
+        fetchEpisodeData();
     }, []);
 
     const toggleActiveButton = (id: number) => {
@@ -35,7 +46,7 @@ function episodeList(props: { handleUpdateCharacters: ((chList: number[], title:
         <div className={styles.epContainer}>
             <h2 className={styles.epTitle}>Episodes</h2>
             <ul className={styles.epList}>
-                {episodes && episodes.length > 0 ?
+                {episodes && !errorOccured ?
                     episodes.map((ep: IEpisode) => {
                         return (
                             <EpisodeItem

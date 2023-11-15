@@ -16,11 +16,10 @@ const setupCharacterData = (allCharacters: ICharacter[]) => {
 };
 
 //API call to get Characters
-export async function getCharacters(list: number[]) {
+export async function getCharacters(list: number[]): Promise<ICharacter[] | string> {
     let characterResults: ICharacter[] = [];
     let url: string = characterUrl;
     let specificType: boolean = false;
-    let characterList: ICharacter[] = [];
 
     if (list.length > 0) {
         url = `${characterUrl}/${list}`;
@@ -37,12 +36,12 @@ export async function getCharacters(list: number[]) {
             characterResults = [...result.results];
         }
 
-        characterList = setupCharacterData(characterResults);
+        const characterList: ICharacter[] = setupCharacterData(characterResults);
 
         return characterList;
 
     } catch (error) {
-        return error;
+        throw new Error("Failed to load data");
     }
 
 }

@@ -23,10 +23,9 @@ const setupEpisodeData = (allEpisodes: IResultEpisode[]) => {
 };
 
 //API call to get list Episodes
-export async function getEpisodeList() {
+export async function getEpisodeList(): Promise<IEpisode[] | string> {
     let episodeResults: IResultEpisode[] = [];
     let url: string = allEpisodesUrl;
-    let episodeList: IEpisode[] = [];
 
     try {
         while (url) {
@@ -42,13 +41,12 @@ export async function getEpisodeList() {
             }
         }
 
-        episodeList = setupEpisodeData(episodeResults);
+        const episodeList: IEpisode[] = setupEpisodeData(episodeResults);
 
         return episodeList;
 
     } catch (error) {
-
-        return error;
+        throw new Error("Failed to load data");
     }
 
 }

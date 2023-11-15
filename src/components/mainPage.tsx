@@ -15,20 +15,31 @@ const initialItems: ICharacter[] = [{
 }];
 
 function mainPage() {
-    const [characters, setCharacters] = useState(initialItems);
+    const [characters, setCharacters] = useState<ICharacter[]>(initialItems);
     const [cList, setCList] = useState<number[]>([]);
     const [episodeTitle, setEpisodeTitle] = useState<string>("");
     const [loader, setLoader] = useState<boolean>(true);
     const [midloader, setMidLoader] = useState<boolean>(false);
+    const [errorLoadingCharacters, setErrorLoadingCharacters] = useState<boolean>(false);
 
     useEffect(() => {
-        getCharacters(cList).then(data => {
-            setTimeout(function () {
-                setMidLoader(false);
-                setLoader(false);
-                setCharacters(data);
-            }, 1000);
-        });
+        const fetchCharacterData = async () => {
+            try {
+                const characterData = await getCharacters(cList);
+                setTimeout(function () {
+                    setMidLoader(false);
+                    setLoader(false);
+                    setErrorLoadingCharacters(false);
+                    setCharacters(characterData as ICharacter[]);
+                }, 1000);
+
+            }
+            catch (error) {
+                setErrorLoadingCharacters(true);
+            }
+        };
+
+        fetchCharacterData();
     }, [cList]);
 
     const updateCharacters = useCallback((chList: number[], title: string) => {
@@ -53,7 +64,8 @@ function mainPage() {
                             handleUpdateCharacters={updateCharacters} />
                         <CharacterList
                             episode={episodeTitle}
-                            characters={characters} />
+                            characters={characters}
+                            errorLoadingCharacters={errorLoadingCharacters} />
                     </div>
                 </div>}
 
