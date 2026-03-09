@@ -1,56 +1,98 @@
 # Rick and Morty Image Feed
 
-## Overview
+A Next.js application that fetches and displays episodes and characters from the public Rick and Morty REST API.  
+Built as a frontend engineering exercise focused on API integration, dynamic state management, and interactive UI.
 
-This project is a Next.js application built with React and TypeScript that implements an Image Feed using the public API provided by [Rick and Morty API](https://rickandmortyapi.com/documentation/#rest). The main features include displaying a list of episodes on the initial page load, highlighting the selected episode, and updating the main view with characters from the selected episode.
+🔗 **Live Demo:** [rickandmorty-diaz-demo.netlify.app](https://rickandmorty-diaz-demo.netlify.app)
 
-[Demo](https://rickandmorty-diaz-demo.netlify.app/) 
+---
 
+## Project Status
 
-## Installation
+`Complete` — Built as a frontend technical exercise.
 
-Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+---
 
-1. Clone the repository:
+## Project Overview
 
+This application implements an interactive image feed driven entirely by a public REST API.  
+Users can browse episodes from a side navigation panel and select any episode to update the main view with characters from that episode. The UI responds to selection state without page reloads, demonstrating controlled component patterns and API-driven rendering.
+
+---
+
+## Features & Functionality
+
+- Episode list loaded on initial render from the Rick and Morty REST API
+- Clickable episode navigation with active selection highlighting
+- Main view dynamically updates character images and names based on selected episode
+- Deselecting an episode reverts the view to the default state
+- Fully driven by external API data — no local data layer
+
+---
+
+## Architecture
+
+```mermaid
+graph TD
+    A[Next.js App] -->|Fetch episodes| B[Rick and Morty REST API]
+    A -->|Fetch characters by episode| B
+    B --> C[Episode Side Nav]
+    B --> D[Character Image Feed]
+    C -->|Selection state| D
+```
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- React
+- TypeScript
+- CSS
+
+**Data**
+- [Rick and Morty Public API](https://rickandmortyapi.com/documentation/#rest)
+
+**Deployment**
+- Netlify
+
+---
+
+## Engineering Notes
+
+**API-driven state management**  
+Episode selection is managed through React state. When an episode is selected, the app fetches the corresponding character data and updates the main view. When deselected, the view reverts to the initial default characters — keeping the UI predictable without additional routing.
+
+**Next.js for a single-view app**  
+Next.js was chosen to demonstrate familiarity with the framework in a lightweight context, handling data fetching and rendering within a structured project setup.
+
+---
+
+## Setup Instructions
+
+**Clone the repository**
 ```bash
 git clone https://github.com/diazelena325/rick_morty.git
 cd rick_morty
 ```
 
-2. Install dependencies:
-
+**Install dependencies**
 ```bash
 npm install
 ```
 
-3. Run the development server:
-
+**Start development server**
 ```bash
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Open your browser at `http://localhost:3000`
 
-## Usage
+---
 
-### Initial Page Load 
+## Screenshots
 
-- The left side-nav displays a list of episodes retrieved from the API endpoint.
-- Each episode in the list is clickable.
-- On initial load, the main view displays character images from first page in the API endpoint.
+> _See the live demo: [rickandmorty-diaz-demo.netlify.app](https://rickandmorty-diaz-demo.netlify.app)_
+<img width="1259" height="719" alt="image" src="https://github.com/user-attachments/assets/c03c679b-bd78-4128-a879-c4efb0002981" />
 
-### Selecting an Episode 
-
-- Clicking on an episode in the left side-nav highlights it with a dark border and a different color.
-- The main view updates the characters' images and names from the selected episode.
-- Selecting a different episode highlights new active episode.
-- Unselecting currently active episode, the view reverts to the initial page load state.
-
-
-## Technologies Used
-
-- Next.js
-- React
-- TypeScript
-- CSS
